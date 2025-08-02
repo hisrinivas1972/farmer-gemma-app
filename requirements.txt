@@ -1,0 +1,9 @@
+streamlit
+torch
+transformers
+accelerate
+kagglehub
+pyttsx3
+vosk
+sounddevice
+Pillow
