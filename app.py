@@ -1,3 +1,26 @@
+import os
+import sys
+import urllib.request
+import zipfile
+
+def download_and_extract_vosk_model():
+    model_url = "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"
+    model_zip = "vosk-model-small-en-us-0.15.zip"
+    model_dir = "vosk-model-small-en-us-0.15"
+
+    if not os.path.exists(model_dir):
+        st.info("Downloading Vosk model (~50MB), please wait...")
+        urllib.request.urlretrieve(model_url, model_zip)
+        with zipfile.ZipFile(model_zip, 'r') as zip_ref:
+            zip_ref.extractall(".")
+        os.remove(model_zip)
+        st.success("Vosk model downloaded and extracted!")
+
+vosk_model_path = "vosk-model-small-en-us-0.15"
+
+if not os.path.exists(vosk_model_path):
+    download_and_extract_vosk_model()
+
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import kagglehub
